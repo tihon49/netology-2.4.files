@@ -38,14 +38,22 @@ def create_cook_book(input_file_name):
 
 # Задача №2
 def get_shop_list_by_dishes(dishes, cooking_book, person_count):
-    cook_book = cooking_book
-    for key in dishes:
-        try:
-            for value in cook_book[key]:
-                value['quantity'] *= person_count
-                print(value)
-        except:
-            pass
+    try:
+        for key in dishes:
+            if key in cooking_book.keys():
+                print(key)
+
+                for value in cooking_book[key]:
+                    value['quantity'] *= person_count
+                    print(value)
+
+                print()
+            else:
+                pass
+    except AttributeError:
+        print('Файл не найден')
+
+
 
 
 
@@ -60,4 +68,4 @@ print('\n' * 3)
 # Задача №2
 print('Задача №2:\n')
 get_shop_list_by_dishes(['Омлет', 'Запеченный картофель','Фахитос'],\
-                        create_cook_book('recipes.txt'), 5)
+                        create_cook_book('recipes.txt'), 3)
