@@ -1,7 +1,6 @@
 from pprint import pprint
 
 
-
 # Задача №1
 def create_cook_book(input_file_name):
     cook_book = {}
@@ -9,7 +8,6 @@ def create_cook_book(input_file_name):
     try:
         with open(input_file_name, encoding='utf-8') as f:
             lst = [line.strip() for line in f]
-
 
         for i, c in enumerate(lst):
             if c.isdigit():
@@ -26,27 +24,21 @@ def create_cook_book(input_file_name):
                                                 'measure':measure})
         return cook_book
 
-
     except FileNotFoundError:
         return(f'Файл: {input_file_name} не найден.')
-
     except Exception as error:
         return f'Ошибка - {error}'
 
 
-
-
 # Задача №2
 def get_shop_list_by_dishes(dishes, cooking_book, person_count):
-    cook_book = cooking_book
     for key in dishes:
         try:
-            for value in cook_book[key]:
+            for value in cooking_book[key]:
                 value['quantity'] *= person_count
                 print(value)
         except:
             pass
-
 
 
 #####################################
