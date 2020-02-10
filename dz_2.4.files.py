@@ -46,7 +46,7 @@ def get_shop_list_by_dishes(dishes, cooking_book, person_count):
                     for k in dictionary:
                         if k == 'ingredient_name':
                             ing_dict[dictionary[k]] = {'measure': dictionary['measure'],
-                                                           'quantity': dictionary['quantity'] * person_count}
+                                                       'quantity': dictionary['quantity'] * person_count}
 
     return ing_dict
 
@@ -61,4 +61,4 @@ print('\n' * 3)
 
 # Задача №2
 print('Задача №2:\n')
-pprint(get_shop_list_by_dishes(['Омлет', 'Омлет'], create_cook_book('recipes.txt'), 2))
+pprint(get_shop_list_by_dishes(['Омлет', 'Омлет'], create_cook_book('recipes.txt'), 5))
