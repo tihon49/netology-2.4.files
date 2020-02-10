@@ -38,15 +38,18 @@ def create_cook_book(input_file_name):
 def get_shop_list_by_dishes(dishes, cooking_book, person_count):
     ing_dict = {}
 
-    for key in cooking_book.keys():
+    for key in cooking_book.keys ():
         for dish in dishes:
             if key == dish:
                 for dictionary in cooking_book[key]:
                     # пробежимся по ключам словаря
-                    for k in dictionary:
-                        if k == 'ingredient_name':
-                            ing_dict[dictionary[k]] = {'measure': dictionary['measure'],
-                                                       'quantity': dictionary['quantity'] * person_count}
+                    ing_name = dictionary['ingredient_name']
+
+                    try:
+                        ing_dict[ing_name]['quantity'] += (dictionary['quantity'] * person_count)
+                    except:
+                        ing_dict[ing_name] = {'measure': dictionary['measure'],
+                                              'quantity': dictionary['quantity'] * person_count}
 
     return ing_dict
 
@@ -61,4 +64,4 @@ print('\n' * 3)
 
 # Задача №2
 print('Задача №2:\n')
-pprint(get_shop_list_by_dishes(['Омлет', 'Омлет'], create_cook_book('recipes.txt'), 5))
+pprint(get_shop_list_by_dishes(['Омлет', 'Омлет'], create_cook_book('recipes.txt'), 2))
