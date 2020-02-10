@@ -11,10 +11,9 @@ def create_cook_book(input_file_name):
             lst = [line.strip() for line in f]
 
         # тут долго ломал голову как лучше начать и взять название блюда... ничего лучше в голову не пришло...
-        # TODO: подтянуть алгоритмы :)
         for i, c in enumerate(lst):
             if c.isdigit():
-                # если элемент == цифра ==> берем название из предшествующего элемента
+                # если элемент == цифра ==> берем название блюда из предшествующего элемента
                 cook_book[lst[i-1]] = []
 
                 # собираем ингридиенты в срезе с индекса после кол-ва ингр-ов до : индекс + кол-во ингр-ов + 1
@@ -37,13 +36,19 @@ def create_cook_book(input_file_name):
 # Задача №2
 # в качестве второго аргумента решил передавать результат работы функции
 def get_shop_list_by_dishes(dishes, cooking_book, person_count):
-    for key in dishes:
-        try:
-            for value in cooking_book[key]:
-                value['quantity'] *= person_count
-                print(value)
-        except:
-            pass
+    ing_dict = {}
+
+    for key in cooking_book.keys():
+        for dish in dishes:
+            if key == dish:
+                for dictionary in cooking_book[key]:
+                    # пробежимся по ключам словаря
+                    for k in dictionary:
+                        if k == 'ingredient_name':
+                            ing_dict[dictionary[k]] = {'measure': dictionary['measure'],
+                                                           'quantity': dictionary['quantity'] * person_count}
+
+    return ing_dict
 
 
 #####################################
@@ -56,5 +61,4 @@ print('\n' * 3)
 
 # Задача №2
 print('Задача №2:\n')
-get_shop_list_by_dishes(['Омлет', 'Запеченный картофель','Фахитос'],\
-                        create_cook_book('recipes.txt'), 5)
+pprint(get_shop_list_by_dishes(['Омлет', 'Омлет'], create_cook_book('recipes.txt'), 2))
